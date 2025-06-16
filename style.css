@@ -1,0 +1,123 @@
+body {
+    background: #000;
+    margin: 0;
+    font-family: 'Arial', 'メイリオ', sans-serif;
+}
+.container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+}
+.outer-box {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 420px;
+    height: 540px;
+    background: #000;
+    position: relative;
+    box-sizing: border-box;
+}
+.coffee-ui {
+    width: 100%;
+    margin: 0 auto;
+    color: #fff;
+}
+.welcome-box {
+    border: 3px solid #fff;
+    padding: 18px 20px;
+    margin: 32px auto 38px auto;
+    font-size: 1.5em;
+    line-height: 1.4;
+    background: #000;
+    text-align: left;
+    width: 340px;
+    box-sizing: border-box;
+}
+.select-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0;
+    gap: 32px;
+}
+.select-main {
+    margin-bottom: 10px;
+    gap: 44px;
+}
+.select-btn {
+    background: none;
+    border: none; /* 四角を削除 */
+    color: #fff;
+    font-size: 1.5em;
+    padding: 2px 32px;
+    margin: 0 8px;
+    border-radius: 0;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 2px;
+    transition: none; /* カーソルを合わせたときの変化を削除 */
+}
+.select-main .select-btn {
+    font-size: 1.4em;
+    border-width: 3px;
+    margin-bottom: 0;
+}
+.select-row.select-hotice {
+    margin-top: 18px;
+    margin-bottom: 0;
+    gap: 60px;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    padding: 8px 0;
+    width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.select-btn.hot {
+    color: #d2691e;
+    border: none;
+    font-size: 1.3em;
+}
+.select-btn.ice {
+    color: #1e90ff;
+    border: none;
+    font-size: 1.3em;
+}
+.select-row.select-strength {
+    margin-top: 0;
+    margin-bottom: 0;
+    gap: 54px;
+    border-bottom: 2px solid #fff;
+    width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 8px 0;
+}
+.select-row.select-strength .select-btn {
+    font-size: 1.3em;
+    min-width: 48px;
+    border: none;
+    color: #fff;
+    letter-spacing: 1.5em;
+    padding: 2px 0;
+}
+.select-row.select-size {
+    margin-top: 0;
+    gap: 80px;
+    width: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 18px;
+}
+.select-row.select-size .select-btn {
+    font-size: 1.4em;
+    min-width: 110px;
+    border: none;
+    color: #fff;
+    letter-spacing: 1px;
+    padding: 2px 0;
+}

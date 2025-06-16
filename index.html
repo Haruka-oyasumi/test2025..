@@ -2,10 +2,160 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>サンプルページ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>コーヒーマシン</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>こんにちは、世界！</h1>
-    <p>これはサンプルのHTMLページです。</p>
+  <div class="container">
+    <div class="outer-box">
+      <div class="coffee-ui">
+        <div class="welcome-box">
+          <p>いらっしゃいませ。<br>お好きな種類の<br>コーヒーを<br>お選びください。</p>
+        </div>
+        <div class="select-row select-main">
+          <button class="select-btn" id="btn-latte">LATE</button>
+          <button class="select-btn" id="btn-coffee">COFFEE</button>
+        </div>
+        <div class="select-row select-hotice">
+          <button class="select-btn hot">HOT</button>
+          <button class="select-btn ice">ICE</button>
+        </div>
+        <div class="select-row select-strength">
+          <button class="select-btn">薄</button>
+          <button class="select-btn">普</button>
+          <button class="select-btn">濃</button>
+        </div>
+        <div class="select-row select-size">
+          <button class="select-btn">REGULAR</button>
+          <button class="select-btn">LARGE</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const latteButton = document.getElementById('btn-latte');
+    const coffeeButton = document.getElementById('btn-coffee');
+    const welcomeBox = document.querySelector('.welcome-box p');
+    const hotButton = document.querySelector('.select-btn.hot');
+    const iceButton = document.querySelector('.select-btn.ice');
+    const strengthButtons = document.querySelectorAll('.select-row.select-strength .select-btn');
+    const sizeButtons = document.querySelectorAll('.select-row.select-size .select-btn');
+
+    function resetBorders(buttons) {
+      buttons.forEach(button => button.style.border = 'none');
+    }
+
+    function enableStrengthSelection() {
+      strengthButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          resetBorders(strengthButtons);
+          button.style.border = '3px solid #fff';
+          if (coffeeButton.style.border === '3px solid rgb(255, 255, 255)') {
+            welcomeBox.innerHTML = '<img src="スクリーンショット (4).png" alt="Strength Selected for Coffee" style="width: 100%; height: auto;">';
+          }
+        });
+      });
+    }
+
+    function enableSizeSelection() {
+      sizeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          resetBorders(sizeButtons);
+          button.style.border = '3px solid #fff';
+        });
+      });
+    }
+
+    function enableSizeSelectionForCoffee() {
+      sizeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          resetBorders(sizeButtons);
+          button.style.border = '3px solid #fff';
+        });
+      });
+    }
+
+    function showGaugeAndComplete() {
+      welcomeBox.innerHTML = `
+        <div style="text-align: center;">
+          <p style="margin: 0; font-size: 1.2em; color: #fff;">完成まで<br>お待ちください。</p>
+          <div style="width: 100%; height: 20px; background: #333; margin-top: 10px; position: relative;">
+            <div id="gauge" style="width: 0%; height: 100%; background: #fff; transition: width 3s linear;"></div>
+          </div>
+        </div>
+      `;
+
+      const gauge = document.getElementById('gauge');
+      setTimeout(() => {
+        gauge.style.width = '100%';
+      }, 100);
+
+      setTimeout(() => {
+        welcomeBox.innerHTML = '<img src="スクリーンショット (6).png" alt="Complete" style="width: 100%; height: auto;">';
+        setTimeout(() => {
+          // 全てを一番初めの段階に戻す
+          welcomeBox.innerHTML = 'いらっしゃいませ。<br>お好きな種類の<br>コーヒーを<br>お選びください。';
+          resetBorders([latteButton, coffeeButton, hotButton, iceButton, ...strengthButtons, ...sizeButtons]);
+        }, 3000);
+      }, 3100);
+    }
+
+    latteButton.addEventListener('click', () => {
+      latteButton.style.border = '3px solid #fff';
+      coffeeButton.style.border = 'none';
+      welcomeBox.innerHTML = '<img src="スクリーンショット (2).png" alt="Latte Selected" style="width: 100%; height: auto;">';
+      welcomeBox.style.height = '120px'; // タテ幅を調整
+    });
+
+    coffeeButton.addEventListener('click', () => {
+      coffeeButton.style.border = '3px solid #fff';
+      latteButton.style.border = 'none';
+      welcomeBox.innerHTML = '<img src="スクリーンショット (2).png" alt="Coffee Selected" style="width: 100%; height: auto;">';
+      welcomeBox.style.height = '120px'; // タテ幅を調整
+    });
+
+    hotButton.addEventListener('click', () => {
+      hotButton.style.border = '3px solid #fff';
+      iceButton.style.border = 'none';
+      if (coffeeButton.style.border === '3px solid rgb(255, 255, 255)') {
+        welcomeBox.innerHTML = '<img src="スクリーンショット (3).png" alt="Hot Coffee Selected" style="width: 100%; height: auto;">';
+        enableStrengthSelection(); // 濃、普、薄の選択を有効化
+      } else if (latteButton.style.border === '3px solid rgb(255, 255, 255)') {
+        welcomeBox.innerHTML = '<img src="スクリーンショット (4).png" alt="Hot Latte Selected" style="width: 100%; height: auto;">';
+      }
+    });
+
+    iceButton.addEventListener('click', () => {
+      iceButton.style.border = '3px solid #fff';
+      hotButton.style.border = 'none';
+      if (coffeeButton.style.border === '3px solid rgb(255, 255, 255)') {
+        welcomeBox.innerHTML = '<img src="スクリーンショット (3).png" alt="Cold Coffee Selected" style="width: 100%; height: auto;">';
+        enableStrengthSelection(); // 濃、普、薄の選択を有効化
+      } else if (latteButton.style.border === '3px solid rgb(255, 255, 255)') {
+        welcomeBox.innerHTML = '<img src="スクリーンショット (4).png" alt="Cold Latte Selected" style="width: 100%; height: auto;">';
+      }
+    });
+
+    strengthButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        resetBorders(strengthButtons);
+        button.style.border = '3px solid #fff';
+        if (coffeeButton.style.border === '3px solid rgb(255, 255, 255)') {
+          enableSizeSelectionForCoffee(); // REGULARまたはLARGEの選択を有効化
+        }
+      });
+    });
+
+    sizeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        resetBorders(sizeButtons);
+        button.style.border = '3px solid #fff';
+        showGaugeAndComplete();
+      });
+    });
+  });
+  </script>
 </body>
 </html>
